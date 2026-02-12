@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  db-movies:
+    image: postgres:15
+    container_name: db-movies-local
+    environment:
+      POSTGRES_DB: db_movies
+      POSTGRES_USER: user_movies
+      POSTGRES_PASSWORD: pass_movies
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./api-movies/sql/local/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - hellin-net
+
+  db-actors:
+    image: postgres:15
+    container_name: db-actors-local
+    environment:
+      POSTGRES_DB: db_actors
+      POSTGRES_USER: user_actors
+      POSTGRES_PASSWORD: pass_actors
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./api-actors/sql/local/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - hellin-net
+
+  frontend-movies:
+    build:
+      context: ./frontend-movies
+      dockerfile: Dockerfile
+    container_name: frontend-local
+    ports:
+      - "8080:80"
+    environment:
+      - API_MOVIES_URL=http://host.docker.internal:8081
+      - API_ACTORS_URL=http://host.docker.internal:8082
+    volumes:
+      - ./frontend-movies:/var/www/html
+    networks:
+      - hellin-net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-local
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - hellin-net
+
+networks:
+  hellin-net:
+    driver: bridge

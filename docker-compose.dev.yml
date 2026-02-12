@@ -1,0 +1,54 @@
+services:
+  db-movies:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: db_movies
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+    volumes:
+      - ./api-movies/sql/dev/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+
+  db-actors:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: db_actors
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+    volumes:
+      - ./api-actors/sql/dev/init.sql:/docker-entrypoint-initdb.d/init.sql
+   
+
+  api-movies:
+    
+    build: 
+      context: ./api-movies
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_USERNAME=dev_user
+      - DB_PASSWORD=dev_password
+    depends_on:
+      - db-movies
+    
+
+  api-actors:
+    build:
+      context: ./api-actors
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_USERNAME=dev_user
+      - DB_PASSWORD=dev_password
+    depends_on:
+      - db-actors
+    
+
+  frontend-movies:
+    build:
+      context: ./frontend-movies
+    ports:
+      - "80:80"
+    environment:
+      - API_MOVIES_URL=http://api-movies:8080
+      - API_ACTORS_URL=http://api-actors:8080
+    
