@@ -1,0 +1,9 @@
+FROM maven:3.9-eclipse-temurin-21
+
+WORKDIR /app
+
+# Expose the default Spring Boot port (or whatever you configure)
+EXPOSE 8080
+
+# Command to run the application in dev mode
+CMD ["mvn", "spring-boot:run"]

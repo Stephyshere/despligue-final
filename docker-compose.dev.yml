@@ -2,53 +2,75 @@ services:
   db-movies:
     image: postgres:15
     environment:
-      POSTGRES_DB: db_movies
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: ${DB_DATABASE:-db_movies}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./api-movies/sql/dev/init.sql:/docker-entrypoint-initdb.d/init.sql
-  
+      - db_movies_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
 
   db-actors:
     image: postgres:15
     environment:
-      POSTGRES_DB: db_actors
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: ${DB_DATABASE:-db_actors}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./api-actors/sql/dev/init.sql:/docker-entrypoint-initdb.d/init.sql
-   
+      - db_actors_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
 
   api-movies:
-    
-    build: 
+    build:
       context: ./api-movies
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./api-movies:/app
+      - ~/.m2:/root/.m2
+    ports:
+      - "8081:8080" # Map host 8081 to container 8080
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - DB_USERNAME=dev_user
-      - DB_PASSWORD=dev_password
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - SERVER_PORT=8080 # Force internal port to 8080
     depends_on:
       - db-movies
-    
 
   api-actors:
     build:
       context: ./api-actors
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./api-actors:/app
+      - ~/.m2:/root/.m2
+    ports:
+      - "8082:8080" # Map host 8082 to container 8080
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - DB_USERNAME=dev_user
-      - DB_PASSWORD=dev_password
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - SERVER_PORT=8080 # Force internal port to 8080
     depends_on:
       - db-actors
-    
 
   frontend-movies:
     build:
       context: ./frontend-movies
     ports:
       - "80:80"
+    volumes:
+      - ./frontend-movies:/var/www/html
     environment:
       - API_MOVIES_URL=http://api-movies:8080
       - API_ACTORS_URL=http://api-actors:8080
-    
+    depends_on:
+      - api-movies
+      - api-actors
+
+volumes:
+  db_movies_data:
+  db_actors_data:
