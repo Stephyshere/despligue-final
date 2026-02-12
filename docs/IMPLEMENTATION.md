@@ -53,15 +53,14 @@ En DEV creamos otros 5 servicios distintos mediante Docker:
 
 ### Configuración Postgre
 
-**⚠️ IMPORTANTE:** Incluye capturas del dashboard de MariaDB SkySQL y la configuración de conexión.
 
-**Dashboard MariaDB SkySQL:**
+**Dashboard :**
 
-![MariaDB SkySQL Dashboard](images/dev-postgre-dashboard.png)
+![DOCKER CONTENEDORES](images/dev-postgre-dashboard.png)
 
 **Datos de conexión utilizados:**
 
-![MariaDB Connection Details](images/pre-mariadb-connection.png)
+![]](images/pre-mariadb-connection.png)
 
 **Connection String utilizado:**
 ```

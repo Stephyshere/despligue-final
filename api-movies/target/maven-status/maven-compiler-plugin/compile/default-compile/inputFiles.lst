@@ -1,0 +1,4 @@
+/app/src/main/java/com/hellin/movies/MoviesApplication.java
+/app/src/main/java/com/hellin/movies/controller/MovieController.java
+/app/src/main/java/com/hellin/movies/model/Movie.java
+/app/src/main/java/com/hellin/movies/repository/MovieRepository.java
