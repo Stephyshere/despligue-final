@@ -2,14 +2,19 @@
 
 ## 1. Datos del Alumno
 
-**Nombre completo:** [Escribe tu nombre aquí]
+**Nombre completo:** Estefania Castellanos Rodriguez
 
 ---
 
 ## 2. Entorno LOCAL
 
 ### Descripción
-[Breve descripción de qué servicios corren en LOCAL: base de datos MySQL, frontends con hot reload, backend desde IDE, phpMyAdmin]
+En nuestro proyecto en local corren un total de 5 servicios: 
+- La base de datos peliculas (db-movies)
+- La base de datos de actores (db-actors)
+- El frontend de las peliculas (frontend-movies)
+- Un gestor de la base de datos (pgAdmin)
+- La red Docker, que junta todas las conexiones en una sola.
 
 ### Capturas de Ejecución
 
@@ -18,14 +23,6 @@
 **Docker containers corriendo:**
 
 ![Docker PS Local](images/local-docker-ps.png)
-
-**Frontend Stranger Things funcionando:**
-
-![Frontend Stranger Local](images/local-frontend-stranger.png)
-
-**Frontend House of the Dragon funcionando:**
-
-![Frontend Dragon Local](images/local-frontend-dragon.png)
 
 **Backend API funcionando (Postman/navegador):**
 
@@ -38,26 +35,29 @@
 **[Añade aquí más capturas que consideres relevantes]**
 
 ### URLs de Acceso
-- Frontend Stranger: `http://localhost:XXXX`
-- Frontend Dragon: `http://localhost:XXXX`
 - Backend: `http://localhost:8080`
 - phpMyAdmin: `http://localhost:XXXX`
 - MySQL: `localhost:3306`
 
 ---
 
-## 3. Entorno PRE
+## 3. Entorno DEV
 
 ### Descripción
-[Breve descripción de qué servicios corren en PRE: backend, frontends en contenedores y base de datos remota MariaDB SkySQL]
+En DEV creamos otros 5 servicios distintos mediante Docker:
+- Base de datos de movies.
+- Base de datos de actors.
+- API de peliculas.
+- API de actores.
+- Frontend.
 
-### Configuración MariaDB SkySQL
+### Configuración Postgre
 
 **⚠️ IMPORTANTE:** Incluye capturas del dashboard de MariaDB SkySQL y la configuración de conexión.
 
 **Dashboard MariaDB SkySQL:**
 
-![MariaDB SkySQL Dashboard](images/pre-mariadb-dashboard.png)
+![MariaDB SkySQL Dashboard](images/dev-postgre-dashboard.png)
 
 **Datos de conexión utilizados:**
 
@@ -76,23 +76,15 @@ jdbc:mysql://serverless-us-east4.sysp0000.db2.skysql.com:4043/series?useSSL=true
 
 **Docker containers corriendo:**
 
-![Docker PS PRE](images/pre-docker-ps.png)
-
-**Frontend Stranger Things funcionando:**
-
-![Frontend Stranger PRE](images/pre-frontend-stranger.png)
-
-**Frontend House of the Dragon funcionando:**
-
-![Frontend Dragon PRE](images/pre-frontend-dragon.png)
+![Docker PS DEV](images/dev-docker-ps.png)
 
 **API funcionando (Postman/navegador):**
 
-![API PRE](images/pre-backend-api.png)
+![API DEV](images/dev-backend-api.png)
 
 **Logs del backend conectándose a MariaDB:**
 
-![Logs Backend PRE](images/pre-backend-logs.png)
+![Logs Backend DEV](images/dev-backend-logs.png)
 
 **[Añade aquí más capturas que consideres relevantes]**
 
@@ -156,15 +148,15 @@ jdbc:mysql://serverless-us-east4.sysp0000.db2.skysql.com:4043/series?useSSL=true
 
 ![Frontend Stranger Build Logs](images/render-frontend-stranger-build.png)
 
-### Configuración Frontend Dragon en Render
+### Configuración API-ACTORS en Render
 
 **Configuración general del servicio:**
 
-![Render Frontend Dragon Config](images/render-frontend-dragon-config.png)
+![Render Frontend Dragon Config](images/renderAPI-ACTORS-config.png)
 
 **Variables de entorno - Frontend Dragon:**
 
-![Variables Frontend Dragon](images/render-frontend-dragon-vars.png)
+![Variables Frontend Dragon](images/render-API-ACTORS-vars.png)
 
 **Build logs:**
 
@@ -194,44 +186,21 @@ jdbc:mysql://serverless-us-east4.sysp0000.db2.skysql.com:4043/series?useSSL=true
 
 ## 5. Notas Adicionales
 
-**⚠️ TIP:** Documenta aquí cualquier aspecto relevante de tu implementación, errores encontrados y cómo los solucionaste, o decisiones técnicas importantes.
 
 ### Nota 1
 
 **Descripción:**
-[Describe algún problema, solución o decisión técnica importante]
-
-**Captura (opcional):**
-
-![Nota 1](images/nota-1.png)
+Mayormente, mi mayor problema es cuando me dan 40 errores y no entiendo como arreglarlo. Lo leo, pero aunque pruebe cosas no consigo arreglarlo del todo.
+He probado muchas veces en casa a hacer esto sola (o al menos sin que me digan que hacer, cuando, y donde) y aunque así es como mas he aprendido, se me siguen escapando cosillas.
 
 ---
 
-### Nota 2
-
-**Descripción:**
-[Describe algún problema, solución o decisión técnica importante]
-
-**Captura (opcional):**
-
-![Nota 2](images/nota-2.png)
-
----
-
-### [Añade más notas si es necesario]
-
----
 
 ## 6. Reflexión Personal
 
 **¿Qué te ha parecido el examen? ¿Qué has aprendido? ¿Qué ha sido lo más difícil?**
 
-[Escribe aquí tu reflexión personal sobre el examen]
-
----
-
-## ⚠️ RECORDATORIO IMPORTANTE
-
-**Cuanto más completo esté este documento, mejor será tu puntuación.**
-
+aunque a lo largo de estos meses he aprendido a solucionar muchos errores, me doy cuenta de que hay cosas que no entiendo por qué hago o para qué son. 
+La verdad es que le he echado bastantes horas a esta asignatura, y no siento haber avanzado lo suficiente 😅😓😭
+Estaria bien que le echases un ojo al codigo, y no puntues solo con "funciona" o "no funciona", porque yo ya se cuando no se levanta algo, pero quiero saber el porqué. Se que no está para el 8 siquiera, porfi con el 5 me conformo jaj.
 ---
